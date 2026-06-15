@@ -9,7 +9,6 @@ HF_REPO_ID = "sinsinwarvarun/SIA-DistilBERT-finetuned"
 class SupportIntegrityAuditor:
     def __init__(self):
         print("Loading tokenizer from Hugging Face Hub...")
-
         self.tokenizer = AutoTokenizer.from_pretrained(HF_REPO_ID)
         print("Loading model from Hugging Face Hub...")
         self.model = AutoModelForSequenceClassification.from_pretrained(HF_REPO_ID)
@@ -74,19 +73,24 @@ class SupportIntegrityAuditor:
         
         # Notebook Scale Variance Engine (Calculates deviation degrees)
         priority_map = {"Low": 1, "Medium": 2, "High": 3, "Critical": 4}
-        inferred_priority_val = 4 if is_urgent_text else (1 if rule_flags["trivial_keyword_present"] else 2)
         human_priority_val = priority_map.get(human_priority, 2)
+        
+        # Calculate inferred severity tracking metrics from notebook heuristics
+        inferred_priority_val = 4 if is_urgent_text else (1 if rule_flags["trivial_keyword_present"] else 2)
         scale_variance = inferred_priority_val - human_priority_val
         
-        # Dynamic Generative Constraint Analysis String Compilation
+        # Compute exact descriptive diagnostic strings used by the dataset
         if prediction == 1:
             verdict_text = "MISMATCH_ALERT"
             if scale_variance < 0:
+                consensus_label = "False Alarm"
                 critique = f"Efficiency Alert: Human agent over-classified this ticket as '{human_priority}'. Ensemble auditing suggests this case represents a low-impact operational task."
             else:
+                consensus_label = "Hidden Crisis"
                 critique = f"SLA Breach Risk: Human agent under-classified this ticket as '{human_priority}'. Ensemble auditing suggests this case represents a high-impact operational task."
         else:
             verdict_text = "CONSISTENT"
+            consensus_label = "Consistent Baseline"
             critique = f"Ticket showing operational conformity. Human tier assignment matches underlying semantic embedding contexts seamlessly."
 
         constraint_analysis_string = (
@@ -95,7 +99,7 @@ class SupportIntegrityAuditor:
             f"and the rule-based NLP layer ({sum(rule_flags.values())}/4) verified the baseline features."
         )
 
-        # EXACT Schema Construction matching the notebook
+        # EXACT Schema Construction matching the requested format
         dossier = {
             "ticket_id": ticket_id,
             "category": category,
@@ -104,7 +108,11 @@ class SupportIntegrityAuditor:
                 "customer_domain": customer_domain,
                 "assigned_priority": human_priority,
                 "support_channel": support_channel,
-                "resolution_time_hrs": int(resolution_time_hrs)
+                "resolution_time_hrs": int(resolution_time_hrs),
+                "assigned_severity": int(human_priority_val),
+                "inferred_severity": int(inferred_priority_val),
+                "severity_delta": int(scale_variance),
+                "consensus_severity_label": consensus_label
             },
             "rule_flags_triggered": rule_flags,
             "signals": [
