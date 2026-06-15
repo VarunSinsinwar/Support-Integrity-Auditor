@@ -127,7 +127,7 @@ For flagged deviations, an exact tracking schema is produced. Hard Rule: Every v
 
 ## 📊 Verification Metrics & Passing Thresholds
 
-[cite_start]The system is evaluated against the mandatory validation split using the following operational thresholds[cite: 73, 85]:
+The system is evaluated against the mandatory validation split using the following operational thresholds:
 
 | Metric Target | Required Threshold | Current Engine Achievement | Status |
 | :--- | :--- | :--- | :--- |
