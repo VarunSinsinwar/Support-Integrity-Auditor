@@ -31,11 +31,11 @@ External CDN Link: Hugging Face Hub Repository
 Runtime Mechanics: The system downloads or pulls the binary weights directly from Hugging Face memory structures using huggingface_hub on startup, caching them natively to prevent system latency.
 
 ## Code Files & Functioning
-1. notebook.ipynb
-   This is the whole pipeline in which experimentation has been done. It includes Data preprocessing,  cleaning, Stage 1 signal formation, Stage 2 classifier training and stage 3 evidence dossier creation.
-2. train_pipeline.py
-   It includes the training script of the project. It can be run locally to get to the results mentioned. It will create the folder with saved model, which can be used further for prediction.
-4. predict.py
+### 1. notebook.ipynb
+This is the whole pipeline in which experimentation has been done. It includes Data preprocessing,  cleaning, Stage 1 signal formation, Stage 2 classifier training and stage 3 evidence dossier creation.
+#### 2. train_pipeline.py
+It includes the training script of the project. It can be run locally to get to the results mentioned. It will create the folder with saved model, which can be used further for prediction.
+### 3. predict.py
 The absolute logical core of the system. It initializes the SupportIntegrityAuditor class which constructs an evaluation ensemble.
 
 Initialization (__init__): Reads local configuration parameters and tokenizer files from ./sia_distilBERT_mismatch_model, then securely drops down model.safetensors using the Hugging Face API to load into PyTorch.
@@ -44,24 +44,24 @@ audit_ticket(): Evaluates an individual record payload, routing data streams acr
 
 audit_batch(): Accepts complete Pandas dataframes, running rows concurrently to append macro-level operational metrics (SIA_Verdict, SIA_Confidence_Pct).
 
-3. app.py
+### 4. app.py
 The presentation wrapper built on Streamlit. It optimizes server interactions by wrapping the auditor instantiation inside @st.cache_resource to preserve GPU/CPU cycles across user refreshes.
 
 Tab 1 (Single Ticket Audit): Allows dynamic text area configuration inputs to parse quick sample tickets.
 
 Tab 2 (Bulk Log Pipeline): Handles spreadsheet asset parsing (.csv, .xlsx), lets users map dynamic columns, outputs analytical metrics summaries, and yields downloadable customized .json portfolio dossiers.
 
-4. requirements.txt
+### 5. requirements.txt
    It has all the modules and library required to run this project. Install them on your system using:
    pip install -r requirements.txt
 
-5. evidence_dossiers.json
+### 6. evidence_dossiers.json
    This file includes all the generated evidence dossier in a json file. Dossiers are built on the test split of the enhanced_customer_support_data.csv which is downloaded from https://www.kaggle.com/datasets/ajverse/customer-support-tickets-crm-dataset/data
 
 ## Methodology and Core Logic
 
 The architectural workflow operates through a definitive three-stage transition pipeline to evaluate human operational compliance without prior golden labeling:
-
+```
 [Raw CRM Records] 
        │
        ▼
@@ -82,6 +82,7 @@ The architectural workflow operates through a definitive three-stage transition 
 │ STAGE 3: Hallucination-Free Evidence Dossier           │
 │ └─ Strict Traceable Mapping Schema                     │
 └────────────────────────────────────────────────────────┘
+```
 
 ### Stage 1: Self-Supervised Pseudo-Label Generation:
 Three signals are extracted from the data:
