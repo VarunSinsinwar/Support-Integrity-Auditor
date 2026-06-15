@@ -38,11 +38,11 @@ It includes the training script of the project. It can be run locally to get to 
 ### 3. predict.py
 The absolute logical core of the system. It initializes the SupportIntegrityAuditor class which constructs an evaluation ensemble.
 
-Initialization (__init__): Reads local configuration parameters and tokenizer files from ./sia_distilBERT_mismatch_model, then securely drops down model.safetensors using the Hugging Face API to load into PyTorch.
+```Initialization (__init__)```: Reads local configuration parameters and tokenizer files from ./sia_distilBERT_mismatch_model, then securely drops down model.safetensors using the Hugging Face API to load into PyTorch.
 
-audit_ticket(): Evaluates an individual record payload, routing data streams across the deep learning layer, static regex arrays, and a pseudo-randomized semantic fallback logic array to stitch together a unified Evidence Dossier.
+```audit_ticket()```: Evaluates an individual record payload, routing data streams across the deep learning layer, static regex arrays, and a pseudo-randomized semantic fallback logic array to stitch together a unified Evidence Dossier.
 
-audit_batch(): Accepts complete Pandas dataframes, running rows concurrently to append macro-level operational metrics (SIA_Verdict, SIA_Confidence_Pct).
+```audit_batch()```: Accepts complete Pandas dataframes, running rows concurrently to append macro-level operational metrics (SIA_Verdict, SIA_Confidence_Pct).
 
 ### 4. app.py
 The presentation wrapper built on Streamlit. It optimizes server interactions by wrapping the auditor instantiation inside @st.cache_resource to preserve GPU/CPU cycles across user refreshes.
@@ -53,7 +53,7 @@ Tab 2 (Bulk Log Pipeline): Handles spreadsheet asset parsing (.csv, .xlsx), lets
 
 ### 5. requirements.txt
    It has all the modules and library required to run this project. Install them on your system using:
-   pip install -r requirements.txt
+   ```pip install -r requirements.txt```
 
 ### 6. evidence_dossiers.json
    This file includes all the generated evidence dossier in a json file. Dossiers are built on the test split of the enhanced_customer_support_data.csv which is downloaded from https://www.kaggle.com/datasets/ajverse/customer-support-tickets-crm-dataset/data
@@ -139,11 +139,11 @@ For flagged deviations, an exact tracking schema is produced. Hard Rule: Every v
 ## Local Execution Setup Guide
 
 1. Clone the Codebase Footprint
-   git clone [https://github.com/VarunSinsinwar/Support-Integrity-Auditor.git](https://github.com/VarunSinsinwar/Support-Integrity-Auditor)
-cd Support-Integrity-Auditor
+   ```git clone [https://github.com/VarunSinsinwar/Support-Integrity-Auditor.git](https://github.com/VarunSinsinwar/Support-Integrity-Auditor)```
+```cd Support-Integrity-Auditor```
 
 2. Install Pinned Dependencies
-   pip install -r requirements.txt
+   ```pip install -r requirements.txt```
 
 3. Launch the Operational Web Portal
-      streamlit run app.py
+      ```streamlit run app.py```
