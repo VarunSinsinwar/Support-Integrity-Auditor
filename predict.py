@@ -8,15 +8,12 @@ HF_REPO_ID = "sinsinwarvarun/SIA-DistilBERT-finetuned"
 
 class SupportIntegrityAuditor:
     def __init__(self):
-         print("Loading tokenizer from Hugging Face Hub...")
+        print("Loading tokenizer from Hugging Face Hub...")
 
-       self.tokenizer = AutoTokenizer.from_pretrained(HF_REPO_ID)
-
-       print("Loading model from Hugging Face Hub...")
-   
-       self.model = AutoModelForSequenceClassification.from_pretrained(HF_REPO_ID)
-   
-       self.model.eval()
+        self.tokenizer = AutoTokenizer.from_pretrained(HF_REPO_ID)
+        print("Loading model from Hugging Face Hub...")
+        self.model = AutoModelForSequenceClassification.from_pretrained(HF_REPO_ID)
+        self.model.eval()
 
     def _extract_rule_flags(self, text, priority):
         """
