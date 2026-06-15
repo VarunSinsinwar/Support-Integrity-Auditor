@@ -1,12 +1,11 @@
-streamlit>=1.30.0
-torch>=2.0.0
-transformers>=4.35.0
-datasets>=2.14.0
+--extra-index-url https://download.pytorch.org/whl/cpu
+streamlit==1.35.0
+transformers==4.41.2
+huggingface_hub==0.23.4
+tokenizers==0.19.3
+torch==2.3.1
+torchvision==0.18.1
 pandas>=2.0.0
 numpy>=1.24.0
 scikit-learn>=1.2.0
-accelerate>=0.21.0
 openpyxl>=3.1.0
-huggingface_hub
---extra-index-url https://download.pytorch.org/whl/cpu
-torchvision==0.18.1
