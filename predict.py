@@ -3,16 +3,29 @@ import torch
 import numpy as np
 import pandas as pd
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
+from huggingface_hub import hf_hub_download  # <--- Just this new import
 
 MODEL_PATH = "./sia_distilBERT_mismatch_model"
+# Update these with your exact Hugging Face details:
+HF_REPO_ID = "sinsinwarvarun/SIA-DistilBERT-finetuned" 
 
 class SupportIntegrityAuditor:
     def __init__(self, model_path=MODEL_PATH):
         if not os.path.exists(model_path):
             raise FileNotFoundError(f"Model assets folder not found at '{model_path}'.")
         
+        # 1. Load the tokenizer locally (since it's already there)
         self.tokenizer = AutoTokenizer.from_pretrained(model_path)
-        self.model = AutoModelForSequenceClassification.from_pretrained(model_path)
+        
+        # 2. Pull ONLY the large weights file from Hugging Face
+        print("Fetching model weights from Hugging Face Hub...")
+        hf_weights_path = hf_hub_download(repo_id=HF_REPO_ID, filename="model.safetensors")
+        
+        # 3. Load the model configuration locally, but pass the HF weights path
+        self.model = AutoModelForSequenceClassification.from_pretrained(
+            model_path, 
+            pretrained_model_name_or_path=hf_weights_path
+        )
         self.model.eval()
 
     def _extract_rule_flags(self, text, priority):
