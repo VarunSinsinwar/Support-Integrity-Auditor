@@ -4,6 +4,7 @@ transformers
 huggingface_hub
 tokenizers
 torch
+torchvision
 pandas
 numpy
 scikit-learn
