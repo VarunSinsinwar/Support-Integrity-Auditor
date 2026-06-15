@@ -8,3 +8,5 @@ scikit-learn>=1.2.0
 accelerate>=0.21.0
 openpyxl>=3.1.0
 huggingface_hub
+--extra-index-url https://download.pytorch.org/whl/cpu
+torchvision==0.18.1
