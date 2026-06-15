@@ -10,15 +10,11 @@ class SupportIntegrityAuditor:
     def __init__(self):
          print("Loading tokenizer from Hugging Face Hub...")
 
-       self.tokenizer = AutoTokenizer.from_pretrained(
-            HF_REPO_ID
-       )
+       self.tokenizer = AutoTokenizer.from_pretrained(HF_REPO_ID)
 
        print("Loading model from Hugging Face Hub...")
    
-       self.model = AutoModelForSequenceClassification.from_pretrained(
-           HF_REPO_ID
-       )
+       self.model = AutoModelForSequenceClassification.from_pretrained(HF_REPO_ID)
    
        self.model.eval()
 
