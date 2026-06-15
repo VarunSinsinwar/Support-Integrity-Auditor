@@ -4,6 +4,8 @@ Support Integrity Auditor (SIA) is an automated triage optimization engine desig
 Link for streamlit web app: 
 ---https://support-integrity-auditor-mars.streamlit.app/
 
+PLEASE NOTE THAT THE notebook.ipynb HAS SOME WIDGETS WHICH I ADDED DURING TRAINING ON COLAB. BUT THEY CANNOT BE VIEWED ON GITHUB, SO IT IS SHOWING INVALID NOTEBOOK. THIS FILE CAN BE VIEWED BY DOWNLOADING IT.
+
 ## Repository Structure & Hybrid Architecture
 
 To bypass GitHub's file size limits while maintaining standard open-source portability, this repository utilizes a **hybrid storage model**: Lightweight logic, tokenizers, and structural configurations sit directly in this GitHub repo, while the heavy deep learning weights are fetched dynamically at runtime.
