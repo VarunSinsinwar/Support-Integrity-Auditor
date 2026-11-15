@@ -93,11 +93,11 @@ Three signals are extracted from the data:
 3. Semantics Embeddings clustering: Embeddings generated using the sentence transformer all-MiniLM-L6-v2 , which were given labels according to Anchors defined for each category. Similarity was calculated for each text to these anchors to assign a label.
 4. LLM zero shot scoring: An LLM Phi-3-mini-4k-instruct was used to generate the labels from the inductive reasoning of the LLM. Numbers from 1 to 4 were generated and taken as LLM inferred severity.
 #### Fusion Strategy:
-Weights are given to each signal
-Rule-based NLP: 0.05
-Resolution Time: 0.05
-Semantics Embedding clustering: 0.25
-LLM inferred severity: 0.65
+Weights are given to each signal:
+Rule-based NLP: 0.05;
+Resolution Time: 0.05;
+Semantics Embedding clustering: 0.25;
+LLM inferred severity: 0.65;
 The derived Inferred Severity (1 = Low, 4 = Critical) is weighed against the human Assigned Priority to compute severity delta:
   Severity delta = Inferred Severity Value - Assigned Priority Value
 If severity delta is greater than or equal to 2, it was assigned a mismatch (1) label, otherwise a consistent (0) label.
