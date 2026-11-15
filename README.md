@@ -99,9 +99,9 @@ Resolution Time: 0.05;
 Semantics Embedding clustering: 0.25;
 LLM inferred severity: 0.65;
 The derived Inferred Severity (1 = Low, 4 = Critical) is weighed against the human Assigned Priority to compute severity delta:
-
-  Severity delta = Inferred Severity Value - Assigned Priority Value
-  
+```
+  Severity delta = (Inferred Severity Value - Assigned Priority Value)
+```
 If severity delta is greater than or equal to 2, it was assigned a mismatch (1) label, otherwise a consistent (0) label.
 
 ### Stage 2: Classifier Training
